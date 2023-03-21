@@ -15,8 +15,11 @@ export const mainRoutes = (app: Express ) => {
     const uploadMiddleware = multer({ dest: 'temp/' })
 
     app.options(`*`, (req, res) => {
-        res.status(200).send()
-    })
+      res
+        .status(200)
+        .header("Access-Control-Allow-Headers", "Content-Type")
+        .send();
+    });
 
     app.get("/invoices", verifyTokenMiddleware, async (req, res) => {
         try {
