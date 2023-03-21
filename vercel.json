@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "invoicebackendapi",
   "builds": [
     {
       "src": "dist/index.js",
