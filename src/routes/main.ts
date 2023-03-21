@@ -16,8 +16,8 @@ export const mainRoutes = (app: Express ) => {
 
     app.options(`*`, (req, res) => {
       res
+        .setHeader("Access-Control-Allow-Headers", "Content-Type")
         .status(200)
-        .header("Access-Control-Allow-Headers", "Content-Type")
         .send();
     });
 
