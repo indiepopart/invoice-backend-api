@@ -5,7 +5,7 @@ import cors from 'cors'
 import { authRoutes } from "./routes/auth"
 import { mainRoutes } from "./routes/main"
 
-// DI 
+// DI
 import { ClientInvoicesRepoAggregate } from './repositories/clientInvoicesRepoAggregate'
 import { ClientsRepository } from './repositories/clientsRepository'
 import { InvoicesRepository } from './repositories/invoicesRepository'
@@ -22,7 +22,9 @@ app.use(function (req, res, next) {
     }
     next(null);
 })
-app.use(cors())
+app.use(cors({
+    "allowedHeaders": "Content-Type"
+}))
 
 
 // parse JSON when content type is application/json
