@@ -14,11 +14,15 @@ export const mainRoutes = (app: Express ) => {
 
     const uploadMiddleware = multer({ dest: 'temp/' })
 
+    app.options(`*`, (req, res) => {
+        res.status(200).send()
+    })
+
     app.get("/invoices", verifyTokenMiddleware, async (req, res) => {
         try {
             let {
                 clientId, startDueDate, endDueDate, startDate, endDate, projectCode,
-                sort, sortBy, offset, limit 
+                sort, sortBy, offset, limit
             } = req.query as Record<string, any>;
 
             if ( typeof limit === 'string' ) {
@@ -108,7 +112,7 @@ export const mainRoutes = (app: Express ) => {
             })
             setTimeout(() => {
                 res.json({clients: result, total})
-            }, 1000)
+            }, 500)
             return
         } catch (err) {
             console.log(err.message);
@@ -197,7 +201,7 @@ export const mainRoutes = (app: Express ) => {
             if ( file ) {
                 const newPath = `public/avatar_${userId}_${file.originalname}`
                 fs.renameSync(
-                    path.resolve(__dirname, `../../${file.path}`), 
+                    path.resolve(__dirname, `../../${file.path}`),
                     path.resolve(__dirname, `../../${newPath}`)
                 )
                 const updatedUser = await usersRepo.setUserProfile(userId, newPath)
@@ -209,11 +213,11 @@ export const mainRoutes = (app: Express ) => {
         } catch(err) {
             return res.status(500).send(err.message)
         }
-        
+
      })
 
      app.put("/me/company", verifyTokenMiddleware, async (req,res) => {
-        
+
         try {
             const usersRepo = app.get("usersRepo") as UsersRepository
             const userId = (req as any).user.user_id as string;
@@ -227,7 +231,7 @@ export const mainRoutes = (app: Express ) => {
      app.get('/reset', (req, res) => {
         // console.log("reseting api data")
         const currentPath = path.resolve(__dirname, '../../scripts/reset-service')
-        const { run } = require(currentPath)  
+        const { run } = require(currentPath)
         const pathToFixtures = `${process.env.PATH_TO_JSON_DIR}/fixtures`;
         run(pathToFixtures)
         const usersRepo = app.get("usersRepo") as UsersRepository
