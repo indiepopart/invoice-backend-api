@@ -22,9 +22,7 @@ app.use(function (req, res, next) {
     }
     next(null);
 })
-app.use(cors({
-    allowedHeaders: 'Content-Type'
-}))
+app.use(cors())
 
 
 // parse JSON when content type is application/json
