@@ -23,7 +23,7 @@ app.use(function (req, res, next) {
     next(null);
 })
 app.use(cors({
-    "allowedHeaders": "Content-Type"
+    allowedHeaders: 'Content-Type'
 }))
 
 
