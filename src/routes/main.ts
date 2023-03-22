@@ -14,7 +14,7 @@ export const mainRoutes = (app: Express ) => {
 
     const uploadMiddleware = multer({ dest: 'temp/' })
 
-    app.get("/invoices", verifyTokenMiddleware, async (req, res) => {
+    app.get("/api/invoices", verifyTokenMiddleware, async (req, res) => {
         try {
             let {
                 clientId, startDueDate, endDueDate, startDate, endDate, projectCode,
@@ -41,7 +41,7 @@ export const mainRoutes = (app: Express ) => {
     })
 
 
-    app.get("/invoices/:id", verifyTokenMiddleware, async (req, res) => {
+    app.get("/api/invoices/:id", verifyTokenMiddleware, async (req, res) => {
         const { id } = req.params;
 
         try {
@@ -59,7 +59,7 @@ export const mainRoutes = (app: Express ) => {
         }
     })
 
-    app.post("/invoices", verifyTokenMiddleware, async (req, res) => {
+    app.post("/api/invoices", verifyTokenMiddleware, async (req, res) => {
        try {
         const invoiceAggregate = app.get("invoiceClientAggregate") as ClientInvoicesRepoAggregate
         const userId = (req as any).user.user_id as string;
@@ -70,7 +70,7 @@ export const mainRoutes = (app: Express ) => {
        }
     })
 
-    app.put("/invoices", verifyTokenMiddleware, async (req, res) => {
+    app.put("/api/invoices", verifyTokenMiddleware, async (req, res) => {
         try {
             const invoicesRepo = app.get("invoicesRepo") as InvoicesRepository
             const userId = (req as any).user.user_id as string;
@@ -91,7 +91,7 @@ export const mainRoutes = (app: Express ) => {
            }
      })
 
-    app.get("/clients", verifyTokenMiddleware, async (req, res) => {
+    app.get("/api/clients", verifyTokenMiddleware, async (req, res) => {
         const invoiceAggregate = app.get("invoiceClientAggregate") as ClientInvoicesRepoAggregate
         try {
             let { sort, sortBy, offset, limit } = req.query as Record<string, any>;
@@ -118,7 +118,7 @@ export const mainRoutes = (app: Express ) => {
 
 
 
-    app.get("/clients/names", verifyTokenMiddleware, async (req, res) => {
+    app.get("/api/clients/names", verifyTokenMiddleware, async (req, res) => {
         try {
             const clientsRepo = app.get("clientsRepo") as ClientsRepository
             const userId = (req as any).user.user_id;
@@ -129,7 +129,7 @@ export const mainRoutes = (app: Express ) => {
         }
     })
 
-    app.get("/clients/:id", verifyTokenMiddleware, async (req, res) => {
+    app.get("/api/clients/:id", verifyTokenMiddleware, async (req, res) => {
         const { id } = req.params;
         try {
             const clientsRepo = app.get("clientsRepo") as ClientsRepository
@@ -145,7 +145,7 @@ export const mainRoutes = (app: Express ) => {
         }
     })
 
-    app.post("/clients", verifyTokenMiddleware, async (req, res) => {
+    app.post("/api/clients", verifyTokenMiddleware, async (req, res) => {
         try {
          const clientsRepo = app.get("clientsRepo") as ClientsRepository
          const userId = (req as any).user.user_id as string;
@@ -156,7 +156,7 @@ export const mainRoutes = (app: Express ) => {
         }
      })
 
-     app.put("/clients", verifyTokenMiddleware, async (req, res) => {
+     app.put("/api/clients", verifyTokenMiddleware, async (req, res) => {
         try {
             const clientsRepo = app.get("clientsRepo") as ClientsRepository
             const userId = (req as any).user.user_id as string;
@@ -177,7 +177,7 @@ export const mainRoutes = (app: Express ) => {
            }
      })
 
-     app.get("/me", verifyTokenMiddleware, async (req, res) => {
+     app.get("/api/me", verifyTokenMiddleware, async (req, res) => {
         try {
             const usersRepo = app.get("usersRepo") as UsersRepository
             const userId = (req as any).user.user_id as string;
@@ -189,7 +189,7 @@ export const mainRoutes = (app: Express ) => {
         }
      })
 
-     app.put('/me/avatar', verifyTokenMiddleware, uploadMiddleware.single('avatar'), async (req, res) => {
+     app.put('/api/me/avatar', verifyTokenMiddleware, uploadMiddleware.single('avatar'), async (req, res) => {
         try {
             const { file } = req
             const userId = (req as any).user.user_id as string;
@@ -212,7 +212,7 @@ export const mainRoutes = (app: Express ) => {
 
      })
 
-     app.put("/me/company", verifyTokenMiddleware, async (req,res) => {
+     app.put("/api/me/company", verifyTokenMiddleware, async (req,res) => {
 
         try {
             const usersRepo = app.get("usersRepo") as UsersRepository
@@ -224,7 +224,7 @@ export const mainRoutes = (app: Express ) => {
         }
      })
 
-     app.get('/reset', (req, res) => {
+     app.get('/api/reset', (req, res) => {
         // console.log("reseting api data")
         const currentPath = path.resolve(__dirname, '../../scripts/reset-service')
         const { run } = require(currentPath)

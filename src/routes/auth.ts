@@ -5,11 +5,11 @@ import { UsersRepository } from '../repositories/usersRepository';
 
 export const authRoutes = (app: Express) => {
 
-    app.post("/login", async (req, res) => {
+    app.post("/api/login", async (req, res) => {
         try {
             // Get user input
             const { email, password } = req.body;
-        
+
             // Validate user input
             if (!(email && password)) {
                 return res.status(400).send("All input is required");
@@ -43,7 +43,7 @@ export const authRoutes = (app: Express) => {
         }
     })
 
-    app.post("/register", async (req, res) => {
+    app.post("/api/register", async (req, res) => {
         try {
             // Get user input
             const { name, email, password, confirmPassword } = req.body;
@@ -64,7 +64,7 @@ export const authRoutes = (app: Express) => {
                     email,
                     password
                 })
-                
+
                 return res.status(200).json({
                     "user_id": user.id,
                 })
