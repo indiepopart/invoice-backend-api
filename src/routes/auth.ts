@@ -5,7 +5,7 @@ import { UsersRepository } from '../repositories/usersRepository';
 
 export const authRoutes = (app: Express) => {
 
-    app.post("/api/login", async (req, res) => {
+    app.post("/login", async (req, res) => {
         try {
             // Get user input
             const { email, password } = req.body;
@@ -43,7 +43,7 @@ export const authRoutes = (app: Express) => {
         }
     })
 
-    app.post("/api/register", async (req, res) => {
+    app.post("/register", async (req, res) => {
         try {
             // Get user input
             const { name, email, password, confirmPassword } = req.body;
