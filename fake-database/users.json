@@ -28,8 +28,8 @@
     {
         "id": "555",
         "name": "Busy User",
-        "email": "fake_user5@officehourtesting.com",
-        "password": "123456",
+        "email": "test@user.com",
+        "password": "passpass$12$12",
         "companyDetails": {
             "name": "Toptal",
             "address": "1st Bulevard Street",
